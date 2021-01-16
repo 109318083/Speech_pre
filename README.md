@@ -91,6 +91,45 @@ with tf.Session(graph=graph) as session:
                 save_path = saver.save(session, modelpath + '/' +modelname,global_step = curr_epoch + 1)
                 print('save model to',save_path)
 ```
+
+ 測試
+```
+sample_rate = 16000
+# Some configs
+num_features = 26  # log filter bank or MFCC features
+# Accounting the 0th index +  space + blank label = 28 characters
+num_classes = ord('z') - ord('a') + 1 + 1 + 1
+
+# Hyper-parameters
+num_epochs = 1 #10000
+num_hidden = 1024
+batch_size = 346
+
+num_examples = 1
+num_batches_per_epoch = 1
+
+# make sure the values match the ones in generate_audio_cache.py
+audio = AudioReader(audio_dir='test',
+                    cache_dir='cache_test',
+                    sample_rate=sample_rate)
+ ```
+
+```
+#還原model
+ with tf.Session(graph=graph) as session:
+
+        #tf.global_variables_initializer().run()
+        
+        saver = tf.train.Saver(max_to_keep=None)
+        if os.path.exists('models/checkpoint'):
+           saver.restore(session,'models/ctc-5615-1468')
+        else:
+            init = tf.global_variables_initializer()
+            session.run(init)```
+
+```
+
+
 <h1>程式方塊圖與寫法</h1>
 
 ![image](https://github.com/MachineLearningNTUT/regression-109318083/blob/main/Diagram.jpg)
