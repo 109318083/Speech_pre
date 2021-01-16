@@ -14,8 +14,35 @@
 >如何改進？
 
 <h1>做法說明</h1>
-  
-   
+
+ 訓練
+
+* 本次用colab進行訓練,因為此範例用的是TF1.X的語法故先降版本
+
+```jupyternotebook
+!pip uninstall tensorflow
+!pip install tensorflow==1.15 
+!pip install tensorflow-gpu==1.15  
+  ```
+  + 進行目錄切換
+```
+%cd /home/tensorflow-ctc-speech-recognition-master
+```
+* 安裝colab所缺少的套件
+```
+!pip install python_speech_features fast_ctc_decode
+```
+
+  執行
+```
+!python ctc_tensorflow_example16000fin002.py
+```
+
+* 範例修改
+
+
+
+
 <h1>程式方塊圖與寫法</h1>
 
 ![image](https://github.com/MachineLearningNTUT/regression-109318083/blob/main/Diagram.jpg)
