@@ -7,8 +7,6 @@
 
 >程式方塊圖與寫法
 
->畫圖做結果分析
-
 >討論預測值誤差很大的，是怎麼回事？
 
 >如何改進？
@@ -133,10 +131,7 @@ audio = AudioReader(audio_dir='test',
 <h1>程式方塊圖與寫法</h1>
 
 ![image](https://github.com/MachineLearningNTUT/regression-109318083/blob/main/Diagram.jpg)
-
-<h1>畫圖做結果分析</h1>
-
     
 <h1> 討論預測值誤差很大的，是怎麼回事？ 如何改進？</h1> 
-    
+於14XX次的時候發現overfitting ,可能要更換其他演算法或加入CNN試試看    
     
