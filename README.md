@@ -41,6 +41,7 @@
 
 範例修改
 * generate_audio_cache.py
+* 將sample rate更改為16000
 ```
 def get_script_arguments():
     args = ArgumentParser()
@@ -51,7 +52,45 @@ def get_script_arguments():
     return args.parse_args()
 ```
 
+*  ctc_tensorflow_example16000fin002.py
+*  更改sample rate為16000及其他參數
 
+```
+#路徑設定
+modelpath = 'model'
+modelname = 'ctc-5615'
+
+sample_rate = 16000
+# Some configs
+num_features = 26  # log filter bank or MFCC features
+# Accounting the 0th index +  space + blank label = 28 characters
+num_classes = ord('z') - ord('a') + 1 + 1 + 1
+
+# Hyper-parameters
+num_epochs = 10000 #10000
+num_hidden = 1024
+batch_size = 16
+
+num_examples = 1
+num_batches_per_epoch = 10
+
+#加入model存擋
+with tf.Session(graph=graph) as session:
+
+        tf.global_variables_initializer().run()
+        
+        saver = tf.train.Saver(max_to_keep=None)
+        if not os.path.exists(modelpath):
+            os.mkdir(modelpath)
+        
+        for curr_epoch in range(num_epochs):
+            train_cost = train_ler = 0
+            start = time.time()
+            
+            if ((curr_epoch + 1) % 1 == 0):
+                save_path = saver.save(session, modelpath + '/' +modelname,global_step = curr_epoch + 1)
+                print('save model to',save_path)
+```
 <h1>程式方塊圖與寫法</h1>
 
 ![image](https://github.com/MachineLearningNTUT/regression-109318083/blob/main/Diagram.jpg)
